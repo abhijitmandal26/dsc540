@@ -2,90 +2,48 @@
 ![image](https://user-images.githubusercontent.com/13950516/162676269-ab24f4ed-7089-44de-bc64-64c2ae6b0710.png)
 
 
-### Context
+### <img src="https://user-images.githubusercontent.com/13950516/162672483-4d953e53-2d6b-49d6-81ba-e7daa4a54351.png" width="40" height="40" /> &nbsp; Problem Statement:
 The novel coronavirus, also known as SARS-CoV-2, is a contagious respiratory virus that first reported in Wuhan, China. On 2/11/2020, the World Health Organization designated the name COVID-19 for the disease caused by the novel coronavirus. This new strain of virus has strike fear in many countries as cities are quarantined and hospitals are overcrowded. 
 This project aims at exploring COVID-19 through data analysis and visualization.
 
-### <img src="https://user-images.githubusercontent.com/13950516/162672483-4d953e53-2d6b-49d6-81ba-e7daa4a54351.png" width="40" height="40" /> &nbsp; Problem Statement:
-
-#### Some of the questions that we are looking to solve here are:
-
-- How do we define a tumor as malignant or benign ?
-- Can any benign tumor turn to malignant at later time ?
-- What are the characteristics of a malignant and benign tumor (size, mass, texture, smoothness etc)?
-- Does the chances of a breast cancer varies from individual to individual?
-
-![image](https://user-images.githubusercontent.com/13950516/162662239-6c732024-3b3e-4b3e-90e9-ba7c32b791cb.png)
-
 
 ### <img src="https://user-images.githubusercontent.com/13950516/162672846-869bf047-63a7-489f-9b33-4f4a3beab1b2.png" width="40" height="40" /> &nbsp; Dataset
-The dataset is taken from https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
+For this project , I have selected data from the following sources:
 
-### <img src="https://user-images.githubusercontent.com/13950516/162673233-e0f5d3ac-ccf7-430e-9a56-46e202098648.png" width="40" height="40" />&nbsp; Variable Descriptions
+1.	**CSV** – The Covid 19 data is scrapped from John Hopkins University github repo : https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series , this has 
 
-diagnosis --> The diagnosis of breast tissues (M = malignant, B = benign)
+  - Daily time series summary tables, including confirmed, deaths and recovered. All data is read in from the daily case report. The time series tables are subject to be updated if inaccuracies are identified in our historical data.
+  
+  - Two time series tables are for the US confirmed cases and deaths, reported at the county level.
+  
+  - Three time series tables are for the global confirmed cases, recovered cases and deaths. Australia, Canada and China are reported at the province/state level.
+  
+  - Data is updated at a daily basis.
 
-radius_mean --> mean of distances from center to points on the perimeter
+2.	**API** – I have used the api : https://services.arcgis.com/lQySeXwbBg53XWDi/arcgis/rest/services/Map/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json <br/> <br/> which will provide the demographic info (Age, employment, sex, ethnicity etc ) for US at a County level for all the corona virus cases, this  information is vital to understand the rate of spread across communities in United States. I will use this data to deep dive into corona cases in US and generate some interesting facts.
 
-texture_mean --> standard deviation of gray-scale values
+3.	**Web** – I am scrapping data from https://www.worldometers.info / website for more insights at a world level like population, density, area and other factors.
 
-perimeter_mean --> mean size of the core tumor
+ 
+The datasets 1 and 2 are related by county and country code, whereas the dataset 1 and 3 are related by Country code, this will help me join the 3 datasets into one and perform any slicing dicing for visualization.
 
-smoothness_mean --> mean of local variation in radius lengths
-
-compactness_mean --> mean of perimeter^2 / area - 1.0
-
-concavity_mean --> mean of severity of concave portions of the contour
-
-concave points_mean --> mean for number of concave portions of the contour
-
-fractaldimensionmean --> mean for "coastline approximation" - 1
-
-radius_se --> standard error for the mean of distances from center to points on the perimeter
-
-texture_se --> standard error for standard deviation of gray-scale values
-
-smoothness_se --> standard error for local variation in radius lengths
-
-compactness_se --> standard error for perimeter^2 / area - 1.0
-
-concavity_se --> standard error for severity of concave portions of the contour
-
-concave points_se --> standard error for number of concave portions of the contour
-
-fractaldimensionse --> standard error for "coastline approximation" - 1
-
-radius_worst --> "worst" or largest mean value for mean of distances from
-center to points on the perimeter
-
-texture_worst --> "worst" or largest mean value for standard deviation of gray-scale values
-
-smoothness_worst --> "worst" or largest mean value for local variation in radius lengths
-
-compactness_worst --> "worst" or largest mean value for perimeter^2 / area - 1.0
-
-concavity_worst --> "worst" or largest mean value for severity of concave portions of the contour
-
-concave points_worst --> "worst" or largest mean value for number of concave portions of the contour
-
-fractaldimensionworst--> "worst" or largest mean value for "coastline approximation" - 1
 
 ### <img src="https://user-images.githubusercontent.com/13950516/162673345-5ea37d71-b9e4-47b7-aa6e-c43921d7b2d0.png" width="40" height="40" />&nbsp; Approach
 
-We will first analyze the data and look for any cleanups needed, then we will derive correlation between the variables, after visualizing and analyzing the data we will use machine learning algorithm KNN to derive at a conclusion.
+1. Data Gathering from Different Sources – While I had previous experience working with CSV for data gathering, I learned doing Web Scrapping using BeautifulSoup for processing HTML data. However there were a few challenges as the Web has grown organically out of many sources. It combines a ton of different technologies, styles, and personalities, and it continues to grow to this day.
+<br/> <br/> Also, I learned to fetch data from Web API using requests library, Request returns а Response, a powerful object for inspecting the results of the  request. Using Response, I examined the headers and contents of the response, get a dictionary with data from JSON in the response, and also determined how successful our access to the server was by the response code from it. 
 
-I have considered variables such as tumor size, mass, texture, smoothness, thickness etc that can help in predicting the chances of a tumor being malignant or benign, 
+2. Data Cleaning and Transformation  - Learned how to filter, sort, merge, join two dataframes in Pandas.
 
-I have used K-nearest neighbor algorithm to classify the tumor, the result of this algorithm provided an accurate response.
+3. Data Visualization  - Learned a lot of visualization libraries like matplotlib, seaborn and plotly.
 
-<img width="420" alt="image" src="https://user-images.githubusercontent.com/13950516/162662282-ad502e34-3b56-4690-9b04-234091bd4ab7.png">
+4. Importing data in Sql table from Python – Mostly in my previous projects I never created any Db, added any table and queried, In this project I got a chance and learned sqllite3 to create database, I have also learned to use sqlalchemy library to create a database table and read into a dataframe.
+
 
 ### <img src="https://user-images.githubusercontent.com/13950516/162673481-c1ce4edf-5240-43be-ae07-e7ef061be0c6.png" width="40" height="40" />&nbsp; Conclusion
 
-We have features of a tumor but I was not sure what does they mean or actually how much do we need to know about these features I believe that we do not need to know meaning of these features however in order to imagine in our mind we should know something like variance, standard deviation, number of sample (count) or max min values. 
+In this project I touched on a lot of the technicalities of data wrangling also I understood the practical importance, Any analyses a business performs will ultimately be constrained by the data that informs them. If data is incomplete, unreliable, or faulty, then analyses will be too—diminishing the value of any insights gleaned. <br/>
+Data wrangling seeks to remove that risk by ensuring data is in a reliable state before it’s analyzed and leveraged. This makes it a critical part of the analytical process. when done manually data wrangling can be time-consuming. This can be reduced by defining some policies around data—for example, requiring that data include certain information or be in a specific format before it’s uploaded to a database.
 
-These type of information helps to understand about what is going on data. For example , the question is appeared in my mind the area_mean feature’s max value is 2500 and smoothness_mean features’ max 0.16340. Also, it would have been great if i could compare the result of my data model vs other machine learning algorithms like Random Forest, SVM etc. 
 
-In future we can look into the implementation of artificial neural net and deep learning for predictive model development with a larger and un- structured data set. 
-This will use unsupervised learning algorithms such SVM etc. to first label the data and distributing them over training set, cross-validation set and test set.
 
